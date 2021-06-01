@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-admin_password                   = ""
+admin_password                   = "**CHANGEPASSWD**"
 admin_username                   = "azureuser"
 client_id                        = ""
 client_secret                    = ""
@@ -7,7 +7,7 @@ cluster_name                     = "clustertest"
 cluster_version                  = "1.20.7"
 create_linux_user_nodepool       = false
 create_windows_user_nodepool     = false
-dns_prefix                       = "k8stest"
+dns_prefix                       = "k8scasetest"
 enable_monitoring                = false
 identity_type                    = "SystemAssigned"
 linux_agent_count                = 1
