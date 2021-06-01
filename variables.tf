@@ -52,7 +52,7 @@ variable "nodepool_version" {
 variable "nodepool_type" {
   description = "(Optional) The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets."
   type        = string
-  default     = "AvailabilitySet"
+  default     = "VirtualMachineScaleSets"
 }
 
 variable "network_plugin" {
