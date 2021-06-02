@@ -29,16 +29,4 @@
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | An ssh\_key block. Only one is currently allowed. Changing this forces a new resource to be created | `string` | `"~/.ssh/id_rsa.pub"` | no |
 | <a name="input_user_assigned_identity_id"></a> [user\_assigned\_identity\_id](#input\_user\_assigned\_identity\_id) | The ID of a user assigned identity. | `string` | `null` | no |
 | <a name="input_windows_agent_count"></a> [windows\_agent\_count](#input\_windows\_agent\_count) | The initial number of Windows nodes which should exist within this Node Pool | `number` | `1` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_client_certificate"></a> [client\_certificate](#output\_client\_certificate) | n/a |
-| <a name="output_client_key"></a> [client\_key](#output\_client\_key) | n/a |
-| <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | n/a |
-| <a name="output_cluster_password"></a> [cluster\_password](#output\_cluster\_password) | n/a |
-| <a name="output_cluster_username"></a> [cluster\_username](#output\_cluster\_username) | n/a |
-| <a name="output_host"></a> [host](#output\_host) | n/a |
-| <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | n/a |
 <!-- END_TF_DOCS -->
