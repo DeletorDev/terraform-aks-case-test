@@ -7,21 +7,15 @@
 - on/off support for monitoring with Log Analytics.
 - Create User Windows/Linux nodepools.
 
-<br />
-
 #### Usage: After cloning the repository, just *modified* the file *variables.tf* with your custom values.
-<br />
 
 > After executing terraform apply command the prompt will ask for admin_password, client_id, and client_secret, but if you create below env vars the prompt won't showing up.
-<br />
 
 * export TF_VAR_admin_password='AdminPWD'
 * export TF_VAR_client_id='SPID'
 * export TF_VAR_client_secret='SPSECRET'
-<br />
 
 > If you have not assigned client_id or client_secret, a SystemAssigned identity will be created.
-
 ---
 
 ## Inputs
