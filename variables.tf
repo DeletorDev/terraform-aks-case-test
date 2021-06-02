@@ -91,8 +91,7 @@ variable "admin_username" {
   type        = string
 }
 
-variable "admin_password" {
-  default     = "**CHANGEPASSWD**"
+variable "admin_password" {  
   description = "The Admin Password for Windows VMs. Length must be between 8 and 123 characters."
   type        = string
 }

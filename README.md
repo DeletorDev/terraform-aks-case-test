@@ -1,12 +1,31 @@
 <!-- BEGIN_TF_DOCS -->
+
+# terraform-aks-case-test
+
+## This Terraform scripts deploy a Kubernetes cluster on Azure using AKS (Azure Kubernetes Service).
+
+- on/off support for monitoring with Log Analytics.
+- Create User Windows/Linux nodepools.
+
+#### Usage: After cloning the repository, just *modified* the file *variables.tf* with your custom values.
+
+> After executing terraform apply command the prompt will ask for admin_password, client_id, and client_secret, but if you create below env vars the prompt won't showing up.
+
+* export TF_VAR_admin_password='AdminPWD'
+* export TF_VAR_client_id='SPID'
+* export TF_VAR_client_secret='SPSECRET'
+
+> If you have not assigned client_id or client_secret, a SystemAssigned identity will be created.
+---
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 8 and 123 characters. | `string` | `"**CHANGEPASSWD**"` | no |
+| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 8 and 123 characters. | `string` | export TF\_VAR\_admin\_password='*AdminPWD*' | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | The username for Windows VMs | `string` | `"azureuser"` | no |
-| <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The Client ID for the Service Principal - export TF\_VAR\_client\_id='SPID' | `string` | n/a | yes |
-| <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The Client Secret for the Service Principal - export TF\_VAR\_client\_secret='SPSECRET' | `string` | n/a | yes |
+| <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The Client ID for the Service Principal. | `string` | export TF\_VAR\_client\_id='SPID' | yes |
+| <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The Client Secret for the Service Principal. | `string` | export TF\_VAR\_client\_secret='SPSECRET' | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created. | `string` | `"clustertest"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). | `string` | `"1.20.7"` | no |
 | <a name="input_create_linux_user_nodepool"></a> [create\_linux\_user\_nodepool](#input\_create\_linux\_user\_nodepool) | Flag to create a Linux user nodepool | `bool` | `false` | no |

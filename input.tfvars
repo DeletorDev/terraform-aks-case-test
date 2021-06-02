@@ -1,4 +1,3 @@
-admin_password                   = "**CHANGEPWD**"
 admin_username                   = "azureuser"
 client_id                        = ""
 client_secret                    = ""
@@ -11,8 +10,8 @@ enable_monitoring                = false
 identity_type                    = "SystemAssigned"
 linux_agent_count                = 1
 load_balancer_sku                = "Standard"
-location                         = "centralus"
-log_analytics_workspace_location = "centralus"
+location                         = "eastus"
+log_analytics_workspace_location = "eastus"
 log_analytics_workspace_name     = "testLogAnalyticsWorkspaceName"
 log_analytics_workspace_sku      = "PerGB2018"
 network_plugin                   = "azure"
