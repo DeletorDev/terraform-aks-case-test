@@ -92,7 +92,7 @@ variable "admin_username" {
 }
 
 variable "admin_password" {  
-  description = "The Admin Password for Windows VMs. Length must be between 8 and 123 characters."
+  description = "The Admin Password for Windows VMs. Length must be between 14 and 123 characters."
   type        = string
 }
 

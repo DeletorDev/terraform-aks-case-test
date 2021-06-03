@@ -22,7 +22,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 8 and 123 characters. | `string` | export TF\_VAR\_admin\_password='*AdminPWD*' | no |
+| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 14 and 123 characters. | `string` | export TF\_VAR\_admin\_password='*AdminPWD*' | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | The username for Windows VMs | `string` | `"azureuser"` | no |
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The Client ID for the Service Principal. | `string` | export TF\_VAR\_client\_id='SPID' | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The Client Secret for the Service Principal. | `string` | export TF\_VAR\_client\_secret='SPSECRET' | yes |
