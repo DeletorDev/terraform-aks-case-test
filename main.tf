@@ -52,15 +52,15 @@ resource "azurerm_kubernetes_cluster" "k8s" {
             key_data = file(var.ssh_public_key)
         }
     }
-
-    windows_profile {
-        admin_username = var.admin_username
-        admin_password = var.admin_password
+/*
+    windows_profile {      
+      admin_username = var.admin_username
+      admin_password = var.admin_password
     }
-
+*/
     default_node_pool {
         name                 = "agentpool"
-        node_count           = 1
+        node_count           = var.default_agent_count
         vm_size              = var.sku_linux_vm_size
         orchestrator_version = var.nodepool_version
         type                 = var.nodepool_type
@@ -87,6 +87,15 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         oms_agent {
             enabled                    = var.enable_monitoring
             log_analytics_workspace_id = var.enable_monitoring ? azurerm_log_analytics_workspace.test[0].id : null
+        }
+
+        azure_policy {
+            enabled = var.enable_azure_policy
+        }
+
+        ingress_application_gateway {
+            enabled = var.enable_agic            
+            subnet_cidr = "10.2.0.0/16"
         }
     }
 

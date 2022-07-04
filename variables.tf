@@ -37,6 +37,12 @@ variable "user_assigned_identity_id" {
   default     = null
 }
 
+variable "enable_azure_policy" {
+    type = bool
+    default = false
+    description = "Flag to enabling Azure Policy"
+}
+
 variable "cluster_version" {
     default = "1.20.7"
     type = string
@@ -59,6 +65,12 @@ variable "network_plugin" {
     default = "azure"
     type = string
     description = "Network plugin to use for networking. Currently supported values are azure and kubenet. Changing this forces a new resource to be created."
+}
+
+variable "default_agent_count" {
+    default = 1
+    type = number
+    description = "The initial number of Default Linux nodes" 
 }
 
 variable "create_linux_user_nodepool" {
@@ -99,7 +111,7 @@ variable "admin_password" {
 variable "load_balancer_sku"{
     default = "Standard"
     type = string
-    description = " Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are Basic and Standard."
+    description = "Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are Basic and Standard."
 }
 
 variable "sku_linux_vm_size" {
@@ -130,6 +142,12 @@ variable "enable_monitoring" {
     type = bool
     default = false
     description = "Flag to enable Logs Analitics in the AKS cluster"
+}
+
+variable "enable_agic" {
+    type = bool
+    default = false
+    description = "Flag to enable AGIC"
 }
 
 variable log_analytics_workspace_name {
