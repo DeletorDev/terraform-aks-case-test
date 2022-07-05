@@ -1,5 +1,5 @@
 variable cluster_name {
-    default = "clustertest"
+    default = "aks-terraform-cluster"
     type = string
     description = "The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created."
 }
@@ -109,7 +109,7 @@ variable "admin_password" {
 }
 
 variable "load_balancer_sku"{
-    default = "Standard"
+    default = "standard"
     type = string
     description = "Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are Basic and Standard."
 }

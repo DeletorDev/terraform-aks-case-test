@@ -1,3 +1,12 @@
+/* terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.12.0"
+    }
+  }
+} */
+
 provider "azurerm" {
     # The "feature" block is required for AzureRM provider 2.x. 
     # If you are using version 1.x, the "features" block is not allowed.
@@ -79,11 +88,11 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         for_each = var.client_id == "" || var.client_secret == "" ? ["identity"] : []
         content {
             type                      = var.identity_type
-            user_assigned_identity_id = var.user_assigned_identity_id
+//            user_assigned_identity_id = var.user_assigned_identity_id
         }
     }
 
-    addon_profile {
+    /* addon_profile {
         oms_agent {
             enabled                    = var.enable_monitoring
             log_analytics_workspace_id = var.enable_monitoring ? azurerm_log_analytics_workspace.test[0].id : null
@@ -97,7 +106,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
             enabled = var.enable_agic            
             subnet_cidr = "10.2.0.0/16"
         }
-    }
+    } */
 
     network_profile {
         load_balancer_sku  = var.load_balancer_sku

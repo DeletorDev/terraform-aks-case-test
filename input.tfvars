@@ -1,5 +1,5 @@
 admin_username                   = "azureuser"
-cluster_name                     = "clustertest"
+cluster_name                     = "aks-terraform-cluster"
 cluster_version                  = "1.22.6"
 nodepool_version                 = "1.22.6"
 default_agent_count              = 1
@@ -13,8 +13,8 @@ enable_azure_policy              = false
 enable_agic                      = true
 identity_type                    = "SystemAssigned"
 
-//"Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are Basic and Standard."
-load_balancer_sku                = "Standard"
+//"Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are basic and standard."
+load_balancer_sku                = "standard"
 location                         = "eastus2"
 log_analytics_workspace_location = "eastus2"
 log_analytics_workspace_name     = "testLogAnalyticsWorkspaceName"
