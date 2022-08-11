@@ -1,10 +1,10 @@
-admin_username                   = "azureuser"
+resource_group_name              = "aks-terraform-vmas-rg"
 cluster_name                     = "aks-terraform-cluster"
 cluster_version                  = "1.22.6"
 nodepool_version                 = "1.22.6"
-default_agent_count              = 1
+default_agent_count              = 3
 create_linux_user_nodepool       = false
-linux_agent_count                = 1
+linux_agent_count                = 3
 create_windows_user_nodepool     = false
 windows_agent_count              = 1
 dns_prefix                       = "k8s"
@@ -24,9 +24,9 @@ log_analytics_workspace_sku      = "PerGB2018"
 network_plugin                   = "azure"
 
 //"(Optional) The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets."
-nodepool_type                    = "VirtualMachineScaleSets"
-resource_group_name              = "aks-terraform-rg"
+nodepool_type                    = "AvailabilitySet"
 sku_linux_vm_size                = "Standard_D2_v2"
 sku_windows_vm_size              = "Standard_D4s_v3"
 ssh_public_key                   = "~/.ssh/id_rsa.pub"
+admin_username                   = "azureuser"
 user_assigned_identity_id        = null

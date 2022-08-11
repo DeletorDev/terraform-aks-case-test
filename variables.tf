@@ -44,13 +44,13 @@ variable "enable_azure_policy" {
 }
 
 variable "cluster_version" {
-    default = "1.20.7"
+    default = "1.22.6"
     type = string
     description = "Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
 }
 
 variable "nodepool_version" {
-    default = "1.20.7"
+    default = "1.22.6"
     type = string
     description = "Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)"
 }
@@ -106,6 +106,7 @@ variable "admin_username" {
 variable "admin_password" {  
   description = "The Admin Password for Windows VMs. Length must be between 14 and 123 characters."
   type        = string
+  default = "Windows12345#$"
 }
 
 variable "load_balancer_sku"{

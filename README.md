@@ -11,7 +11,6 @@
 
 > After executing terraform apply command the prompt will ask for admin_password, client_id, and client_secret, but if you create below env vars the prompt won't showing up.
 
-* export TF_VAR_admin_password='AdminPWD'
 * export TF_VAR_client_id='SPID'
 * export TF_VAR_client_secret='SPSECRET'
 
@@ -22,12 +21,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 14 and 123 characters. | `string` | export TF\_VAR\_admin\_password='*AdminPWD*' | no |
+| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Admin Password for Windows VMs. Length must be between 14 and 123 characters. | `string` | `"Windows12345#$"` | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | The username for Windows VMs | `string` | `"azureuser"` | no |
 | <a name="input_client_id"></a> [client\_id](#input\_client\_id) | The Client ID for the Service Principal. | `string` | export TF\_VAR\_client\_id='SPID' | yes |
 | <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | The Client Secret for the Service Principal. | `string` | export TF\_VAR\_client\_secret='SPSECRET' | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created. | `string` | `"clustertest"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). | `string` | `"1.20.7"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). | `string` | `"1.22.6"` | no |
 | <a name="input_create_linux_user_nodepool"></a> [create\_linux\_user\_nodepool](#input\_create\_linux\_user\_nodepool) | Flag to create a Linux user nodepool | `bool` | `false` | no |
 | <a name="input_create_windows_user_nodepool"></a> [create\_windows\_user\_nodepool](#input\_create\_windows\_user\_nodepool) | Flag to create a Windows user nodepool | `bool` | `false` | no |
 | <a name="input_dns_prefix"></a> [dns\_prefix](#input\_dns\_prefix) | DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created | `string` | `"k8scasetest"` | no |
