@@ -1,4 +1,5 @@
 resource_group_name              = "aks-terraform-vmas-rg"
+location                         = "eastus2"
 cluster_name                     = "aks-terraform-cluster"
 cluster_version                  = "1.22.6"
 nodepool_version                 = "1.22.6"
@@ -10,13 +11,11 @@ windows_agent_count              = 1
 dns_prefix                       = "k8s"
 enable_monitoring                = false
 enable_azure_policy              = false
-enable_agic                      = true
+enable_agic                      = false
 identity_type                    = "SystemAssigned"
 
 //"Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are basic and standard."
 load_balancer_sku                = "standard"
-location                         = "eastus2"
-log_analytics_workspace_location = "eastus2"
 log_analytics_workspace_name     = "testLogAnalyticsWorkspaceName"
 log_analytics_workspace_sku      = "PerGB2018"
 
@@ -24,7 +23,7 @@ log_analytics_workspace_sku      = "PerGB2018"
 network_plugin                   = "azure"
 
 //"(Optional) The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets."
-nodepool_type                    = "AvailabilitySet"
+nodepool_type                    = "VirtualMachineScaleSets"
 sku_linux_vm_size                = "Standard_D2_v2"
 sku_windows_vm_size              = "Standard_D4s_v3"
 ssh_public_key                   = "~/.ssh/id_rsa.pub"
