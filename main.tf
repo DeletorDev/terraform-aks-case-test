@@ -1,11 +1,11 @@
-/* terraform {
+terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.12.0"
+      version = "3.17.0"
     }
   }
-} */
+}
 
 provider "azurerm" {
     # The "feature" block is required for AzureRM provider 2.x. 
@@ -17,6 +17,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "k8s" {
     name     = var.resource_group_name
     location = var.location
+    tags = {
+        Environment = "Case Testing"
+    }
 }
 
 resource "random_id" "log_analytics_workspace_name_suffix" {
@@ -32,6 +35,7 @@ resource "azurerm_log_analytics_workspace" "test" {
     resource_group_name = azurerm_resource_group.k8s.name
     sku                 = var.log_analytics_workspace_sku
 }
+//depends_on = [azurerm_resource_group]
 
 resource "azurerm_log_analytics_solution" "test" {
     count = var.enable_monitoring ? 1 : 0
