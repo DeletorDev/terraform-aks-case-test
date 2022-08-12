@@ -157,13 +157,6 @@ variable log_analytics_workspace_name {
     description = " Specifies the name of the Log Analytics Workspace. Workspace name should include 4-63 letters, digits or '-'. The '-' shouldn't be the first or the last symbol. Changing this forces a new resource to be created"
 }
 
-# refer https://azure.microsoft.com/global-infrastructure/services/?products=monitor for log analytics available regions
-variable log_analytics_workspace_location {
-    default = "centralus"
-    type = string
-    description = "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created"
-}
-
 # refer https://azure.microsoft.com/pricing/details/monitor/ for log analytics pricing 
 variable log_analytics_workspace_sku {
     default = "PerGB2018"
