@@ -3,15 +3,8 @@
 .plan
 planfiles/
 statefiles/
-.terraform/plugins/linux_amd64/terraform-provider-azurerm_v2.56.0_x5
-.terraform/plugins/linux_amd64/terraform-provider-random_v3.1.0_x5
-.terraform/providers/registry.terraform.io/hashicorp/azurerm/2.61.0/linux_amd64/terraform-provider-azurerm_v2.61.0_x5
-.terraform/providers/registry.terraform.io/hashicorp/random/3.1.0/linux_amd64/terraform-provider-random_v3.1.0_x5
-.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.0.0/linux_amd64/terraform-provider-azurerm_v3.0.0_x5
-.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.12.0/linux_amd64/terraform-provider-azurerm_v3.12.0_x5
-.terraform/providers/registry.terraform.io/hashicorp/random/3.3.2/linux_amd64/terraform-provider-random_v3.3.2_x5
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/plugins/linux_amd64/lock.json
 .gitignore
-.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.17.0/linux_amd64/terraform-provider-azurerm_v3.17.0_x5
+.terraform/

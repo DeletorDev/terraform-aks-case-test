@@ -19,10 +19,12 @@ variable location {
 variable "client_id" {
     description = "The Client ID for the Service Principal - export TF_VAR_client_id='SPID'"
     type = string
+    default = ""
 }
 variable "client_secret" {
     description = "The Client Secret for the Service Principal - export TF_VAR_client_secret='SPSECRET'"
     type = string
+    default = ""
 }
 
 variable "identity_type" {
@@ -32,9 +34,9 @@ variable "identity_type" {
 }
 
 variable "user_assigned_identity_id" {
-  description = "The ID of a user assigned identity."
-  type        = string
-  default     = null
+  description = "If `UserAssigned` is set, a `user_assigned_identity_id` must be set as well."
+  type        = list
+  default     = []
 }
 
 variable "enable_azure_policy" {
@@ -44,13 +46,13 @@ variable "enable_azure_policy" {
 }
 
 variable "cluster_version" {
-    default = "1.22.6"
+    default = "1.22.11"
     type = string
     description = "Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
 }
 
 variable "nodepool_version" {
-    default = "1.22.6"
+    default = "1.22.11"
     type = string
     description = "Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)"
 }
@@ -79,11 +81,17 @@ variable "create_linux_user_nodepool" {
     description = "Flag to create a Linux user nodepool"
 }
 
-variable "linux_agent_count" {
-    default = 1
-    type = number
-    description = "The initial number of Linux nodes which should exist within this Node Pool" 
+variable "linux_user_nodepool_map" {
+    type = map(object({        
+        nodes_size = string
+        node_count = number
+    }))
+    default = {
+        "userpool" = {nodes_size = "Standard_D2_v3", node_count = 1}
+    }   
+    description = "Flag to create a Linux user nodepool"
 }
+
 
 variable "create_windows_user_nodepool" {
     type = bool
