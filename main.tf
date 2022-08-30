@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.17.0"
+      version = "3.20.0"
     }
   }
 }
@@ -30,7 +30,7 @@ resource "random_id" "log_analytics_workspace_name_suffix" {
 resource "azurerm_log_analytics_workspace" "test" {
     count = var.enable_monitoring ? 1 : 0
     # The WorkSpace name has to be unique across the whole of azure, not just the current subscription/tenant.
-    name                = "${var.log_analytics_workspace_name}-${random_id.log_analytics_workspace_name_suffix[0].dec}"
+    name                = "${var.log_analytics_workspace_name}_${random_id.log_analytics_workspace_name_suffix[0].dec}"
     location            = azurerm_resource_group.k8s.location
     resource_group_name = azurerm_resource_group.k8s.name
     sku                 = var.log_analytics_workspace_sku
@@ -57,6 +57,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     resource_group_name = azurerm_resource_group.k8s.name
     dns_prefix          = var.dns_prefix
     kubernetes_version  = var.cluster_version 
+    azure_policy_enabled = var.enable_azure_policy
 
     linux_profile {
         admin_username = "ubuntu"
@@ -65,13 +66,14 @@ resource "azurerm_kubernetes_cluster" "k8s" {
             key_data = file(var.ssh_public_key)
         }
     }
-/*
+
     windows_profile {      
-      admin_username = var.admin_username
-      admin_password = var.admin_password
+        admin_username = var.admin_username
+        admin_password = var.admin_password
+    
     }
-*/
-    default_node_pool {
+
+    default_node_pool {      
         name                 = "agentpool"
         node_count           = var.default_agent_count
         vm_size              = var.sku_linux_vm_size
@@ -91,26 +93,25 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     dynamic "identity" {
         for_each = var.client_id == "" || var.client_secret == "" ? ["identity"] : []
         content {
-            type                      = var.identity_type
-//            user_assigned_identity_id = var.user_assigned_identity_id
+            type = var.identity_type
+            identity_ids = var.user_assigned_identity_id
+        }
+    }
+    
+    dynamic oms_agent {        
+        for_each = var.enable_monitoring ? ["Enabled"] : []
+        content {
+            log_analytics_workspace_id = azurerm_log_analytics_workspace.test[0].id
         }
     }
 
-    /* addon_profile {
-        oms_agent {
-            enabled                    = var.enable_monitoring
-            log_analytics_workspace_id = var.enable_monitoring ? azurerm_log_analytics_workspace.test[0].id : null
-        }
-
-        azure_policy {
-            enabled = var.enable_azure_policy
-        }
-
-        ingress_application_gateway {
-            enabled = var.enable_agic            
+    dynamic ingress_application_gateway {
+        for_each = var.enable_agic ? ["Enabled"] : []
+        content {
+            gateway_name = "myagicservice"
             subnet_cidr = "10.2.0.0/16"
         }
-    } */
+    }
 
     network_profile {
         load_balancer_sku  = var.load_balancer_sku
@@ -125,17 +126,20 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "linux" {
-    count = var.create_linux_user_nodepool ? 1 : 0
-    name                  = "usernodepool"
-    kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
-    vm_size               = var.sku_linux_vm_size
-    node_count            = var.linux_agent_count
-    os_type = "Linux"
+resource "azurerm_kubernetes_cluster_node_pool" "linux" {       
+    lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
+    for_each = var.create_linux_user_nodepool ? var.linux_user_nodepool_map : {}
 
-    tags = {
-        Environment = "User Linux nodepool"
-    }
+    name                  = each.key
+    vm_size               = each.value.nodes_size
+    node_count            = each.value.node_count      
+    os_type               = "Linux"
+    kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
+    tags = { NodepoolType  = "User nodepool - Linux" }   
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "windows" {
